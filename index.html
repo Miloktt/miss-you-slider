@@ -9,6 +9,14 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 50px;
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            background-size: 400% 400%;
+            animation: rainbow 10s ease infinite;
+        }
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         .slider-container {
             margin: 20px 0;
@@ -29,7 +37,7 @@
 </head>
 <body>
 
-    <h2>Between 1-10, how much do you miss me? ❤️</h2>
+    <h2>How much does my rainbow baby miss me? ❤️</h2>
     <div class="slider-container">
         <input type="range" id="missSlider" min="1" max="10" value="10">
         <p id="sliderValue">10</p>
@@ -62,7 +70,7 @@
         function submitForm() {
             slider.value = 10;
             sliderValue.innerText = "10 😍";
-            document.body.innerHTML = "<h2>Woah... calm down :D OK yes I do miss you this much too! :P ❤️</h2>";
+            document.body.innerHTML = "<h2>Woah... calm down :D</h2><h2>OK yes, I do miss you this much too! :P ❤️</h2>";
         }
     </script>
 
