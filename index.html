@@ -45,11 +45,19 @@
             sliderValue.innerText = slider.value;
         });
 
-        // Automatically reset slider to 10 when mouse button is released
+        // Automatically reset slider to 10 when mouse button or touch is released
         slider.addEventListener("mouseup", () => {
+            resetSlider();
+        });
+
+        slider.addEventListener("touchend", () => {
+            resetSlider();
+        });
+
+        function resetSlider() {
             slider.value = 10;
             sliderValue.innerText = "10";
-        });
+        }
 
         function submitForm() {
             slider.value = 10;
