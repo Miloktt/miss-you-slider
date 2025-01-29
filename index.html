@@ -31,8 +31,8 @@
 
     <h2>Between 1-10, how much do you miss me? ❤️</h2>
     <div class="slider-container">
-        <input type="range" id="missSlider" min="1" max="10" value="5">
-        <p id="sliderValue">5</p>
+        <input type="range" id="missSlider" min="1" max="10" value="10">
+        <p id="sliderValue">10</p>
     </div>
     <button onclick="submitForm()">Submit</button>
 
@@ -45,20 +45,16 @@
             sliderValue.innerText = slider.value;
         });
 
+        // Automatically reset slider to 10 when mouse button is released
+        slider.addEventListener("mouseup", () => {
+            slider.value = 10;
+            sliderValue.innerText = "10";
+        });
+
         function submitForm() {
-            // Animate the slider to move to 10
-            let currentValue = parseInt(slider.value);
-            let interval = setInterval(() => {
-                if (currentValue < 10) {
-                    currentValue++;
-                    slider.value = currentValue;
-                    sliderValue.innerText = currentValue;
-                } else {
-                    clearInterval(interval);
-                    // Redirect to a new page
-                    document.body.innerHTML = "<h2>I miss you this much too! :) ❤️</h2>";
-                }
-            }, 100);
+            slider.value = 10;
+            sliderValue.innerText = "10 😍";
+            document.body.innerHTML = "<h2>I miss you this much too! :) ❤️</h2>";
         }
     </script>
 
