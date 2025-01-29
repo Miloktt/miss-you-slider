@@ -49,9 +49,14 @@
             transform: scale(0.95);
         }
 
-        .fade-out {
+        .fade-in {
             opacity: 0;
-            transition: opacity 1s ease-out;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
@@ -61,7 +66,7 @@
     
     <div class="slider-container">
         <label for="missSlider">
-            <input type="range" id="missSlider" min="1" max="10" value="10" aria-label="How much do you miss me?">
+            <input type="range" id="missSlider" min="1" max="10" value="10">
             <p id="sliderValue">10</p>
         </label>
     </div>
@@ -77,7 +82,7 @@
             sliderValue.innerText = slider.value;
         });
 
-        // Reset slider after a short delay
+        // Reset slider after releasing (with a delay for a smoother experience)
         slider.addEventListener("mouseup", () => setTimeout(resetSlider, 800));
         slider.addEventListener("touchend", () => setTimeout(resetSlider, 800));
 
@@ -89,17 +94,10 @@
         function submitForm() {
             slider.value = 10;
             sliderValue.innerText = "10 😍";
-            
-            document.body.classList.add("fade-out");
 
+            // Delay before showing the second message for a smoother transition
             setTimeout(() => {
                 document.body.innerHTML = `
-                    <h2>Woah... calm down :D</h2>
-                    <h2>OK yes, I do miss you this much too! :P ❤️</h2>
-                `;
-            }, 1000);
-        }
-    </script>
-
-</body>
-</html>
+                    <h2 class="fade-in">Woah... calm down :D</h2>
+                    <h2 class="fade-in">OK yes, I do miss you this much too! :P ❤️</h2>
+      
