@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Much Do You Miss Me?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .slider-container {
+            margin: 20px 0;
+        }
+        input[type="range"] {
+            width: 300px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>How much do you miss me? ❤️</h2>
+    <div class="slider-container">
+        <input type="range" id="missSlider" min="1" max="10" value="5">
+        <p id="sliderValue">5</p>
+    </div>
+    <button onclick="submitForm()">Submit</button>
+
+    <script>
+        let slider = document.getElementById("missSlider");
+        let sliderValue = document.getElementById("sliderValue");
+
+        // Move the slider back and forth automatically
+        let direction = 1;
+        setInterval(() => {
+            let newValue = parseInt(slider.value) + direction;
+            if (newValue >= 10 || newValue <= 1) direction *= -1;
+            slider.value = newValue;
+            sliderValue.innerText = newValue;
+        }, 500);
+
+        function submitForm() {
+            slider.value = 10;
+            sliderValue.innerText = "10 😍";
+            alert("Aww! You miss me so much! 😘");
+        }
+    </script>
+
+</body>
+</html>
