@@ -29,7 +29,7 @@
 </head>
 <body>
 
-    <h2>How much do you miss me? ❤️</h2>
+    <h2>Between 1-10, how much do you miss me? ❤️</h2>
     <div class="slider-container">
         <input type="range" id="missSlider" min="1" max="10" value="5">
         <p id="sliderValue">5</p>
@@ -40,19 +40,25 @@
         let slider = document.getElementById("missSlider");
         let sliderValue = document.getElementById("sliderValue");
 
-        // Move the slider back and forth automatically
-        let direction = 1;
-        setInterval(() => {
-            let newValue = parseInt(slider.value) + direction;
-            if (newValue >= 10 || newValue <= 1) direction *= -1;
-            slider.value = newValue;
-            sliderValue.innerText = newValue;
-        }, 500);
+        // Update displayed value when the slider is moved
+        slider.addEventListener("input", () => {
+            sliderValue.innerText = slider.value;
+        });
 
         function submitForm() {
-            slider.value = 10;
-            sliderValue.innerText = "10 😍";
-            alert("Aww! You miss me so much! 😘");
+            // Animate the slider to move to 10
+            let currentValue = parseInt(slider.value);
+            let interval = setInterval(() => {
+                if (currentValue < 10) {
+                    currentValue++;
+                    slider.value = currentValue;
+                    sliderValue.innerText = currentValue;
+                } else {
+                    clearInterval(interval);
+                    // Redirect to a new page
+                    document.body.innerHTML = "<h2>I miss you this much too! :) ❤️</h2>";
+                }
+            }, 100);
         }
     </script>
 
