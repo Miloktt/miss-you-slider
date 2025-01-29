@@ -12,55 +12,74 @@
             background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
             background-size: 400% 400%;
             animation: rainbow 10s ease infinite;
+            transition: background 1s ease-in-out;
         }
+
         @keyframes rainbow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+
         .slider-container {
             margin: 20px 0;
         }
+
         input[type="range"] {
             width: 300px;
+            cursor: pointer;
         }
+
         button {
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 12px 25px;
+            font-size: 18px;
             cursor: pointer;
             background-color: red;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: darkred;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        .fade-out {
+            opacity: 0;
+            transition: opacity 1s ease-out;
         }
     </style>
 </head>
 <body>
 
     <h2>How much does my rainbow baby miss me? ❤️</h2>
+    
     <div class="slider-container">
-        <input type="range" id="missSlider" min="1" max="10" value="10">
-        <p id="sliderValue">10</p>
+        <label for="missSlider">
+            <input type="range" id="missSlider" min="1" max="10" value="10" aria-label="How much do you miss me?">
+            <p id="sliderValue">10</p>
+        </label>
     </div>
+
     <button onclick="submitForm()">Submit</button>
 
     <script>
-        let slider = document.getElementById("missSlider");
-        let sliderValue = document.getElementById("sliderValue");
+        const slider = document.getElementById("missSlider");
+        const sliderValue = document.getElementById("sliderValue");
 
         // Update displayed value when the slider is moved
         slider.addEventListener("input", () => {
             sliderValue.innerText = slider.value;
         });
 
-        // Automatically reset slider to 10 when mouse button or touch is released
-        slider.addEventListener("mouseup", () => {
-            resetSlider();
-        });
-
-        slider.addEventListener("touchend", () => {
-            resetSlider();
-        });
+        // Reset slider after a short delay
+        slider.addEventListener("mouseup", () => setTimeout(resetSlider, 800));
+        slider.addEventListener("touchend", () => setTimeout(resetSlider, 800));
 
         function resetSlider() {
             slider.value = 10;
@@ -70,7 +89,15 @@
         function submitForm() {
             slider.value = 10;
             sliderValue.innerText = "10 😍";
-            document.body.innerHTML = "<h2>Woah... calm down :D</h2><h2>OK yes, I do miss you this much too! :P ❤️</h2>";
+            
+            document.body.classList.add("fade-out");
+
+            setTimeout(() => {
+                document.body.innerHTML = `
+                    <h2>Woah... calm down :D</h2>
+                    <h2>OK yes, I do miss you this much too! :P ❤️</h2>
+                `;
+            }, 1000);
         }
     </script>
 
